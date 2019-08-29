@@ -1,4 +1,4 @@
 package com.luzhiqing.bamboo.dao;
 
-public class test {
+public interface ExpressOrderDao {
 }

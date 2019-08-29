@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ExpressOrderRequestVO {
+public class ExpressOrderDTO {
 
     private String expressNumber;
     private ExpressCompayType expressCompany;

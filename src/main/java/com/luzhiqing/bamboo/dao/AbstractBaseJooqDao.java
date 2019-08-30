@@ -8,10 +8,18 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 单表操作基础抽象类
+ *
+ * @param <R>
+ * @param <T>
+ * @param <P>
+ */
 public abstract class AbstractBaseJooqDao<R extends TableRecord<R>, T extends Table<R>, P> implements BaseJooqDao<P> {
+
     @Autowired
     protected DSLContext dsl;
+
     /**
      * 实体对应的数据库表
      */
@@ -20,9 +28,42 @@ public abstract class AbstractBaseJooqDao<R extends TableRecord<R>, T extends Ta
      * pojo Class
      */
     protected Class<P> clazz;
+    /**
+     * 主键
+     */
+    protected Field<Integer> pkField;
 
-    protected abstract void setTable(T table);
-    protected abstract void setClass(Class<P> clazz);
+    /**
+     * 主键名
+     */
+    private static final String PK_NAME = "ID";
+
+    /**
+     * 对应数据库表
+     *
+     * @return
+     */
+    protected abstract T getTable();
+
+    /**
+     * 对应pojo Class
+     *
+     * @return
+     */
+    protected abstract Class<P> getClazz();
+
+    private AbstractBaseJooqDao() {
+        this.table = getTable();
+        this.clazz = getClazz();
+        table.fields();
+        for (Field field : table.fields()) {
+            boolean isPrimaryKey = PK_NAME.equals(field.getName());
+            if (isPrimaryKey) {
+                pkField = field;
+                break;
+            }
+        }
+    }
 
     @Override
     public long insert(P pojo) {
@@ -40,8 +81,33 @@ public abstract class AbstractBaseJooqDao<R extends TableRecord<R>, T extends Ta
     }
 
     @Override
-    public P update(P pojo) {
-        return null;
+    public long delete(P pojo, Callback callback) {
+        callback.ececute();
+        R record = table.newRecord();
+        record.from(pojo);
+        List<Condition> conditions = createConditions(record);
+        return dsl.delete(table).where(conditions).execute();
+    }
+
+    @Override
+    public int update(P pojo) {
+        R record = table.newRecord();
+        record.from(pojo);
+        UpdateSetMoreStep<R> updateFromStep = createUpdateMoreStep(record);
+        if (null != updateFromStep) {
+            return updateFromStep.where(pkField.eq(record.getValue(pkField))).execute();
+        }
+        return 0;
+    }
+
+    @Override
+    public int batchUpdate(List<P> pojos) {
+        return 0;
+    }
+
+    @Override
+    public void batchUpdateSync(List<P> pojos) {
+
     }
 
     @Override
@@ -62,7 +128,12 @@ public abstract class AbstractBaseJooqDao<R extends TableRecord<R>, T extends Ta
 
     @Override
     public int bachInsert(List<P> pojos) {
-        return 0;
+        return dsl.insertInto(table).values(pojos).execute();
+    }
+
+    @Override
+    public void bachInsertSync(List<P> pojos) {
+        dsl.insertInto(table).values(pojos).executeAsync();
     }
 
     /**
@@ -79,10 +150,29 @@ public abstract class AbstractBaseJooqDao<R extends TableRecord<R>, T extends Ta
                 conditions.add(field.eq(record.get(field)));
             }
         }
-        if(CollectionUtils.isEmpty(conditions)){
+        if (CollectionUtils.isEmpty(conditions)) {
             throw new RuntimeException("条件为空");
         }
         return conditions;
+    }
+
+    /**
+     * 根据record创建需要更新的列
+     *
+     * @param record
+     * @return
+     */
+    private UpdateSetMoreStep<R> createUpdateMoreStep(R record) {
+        UpdateSetMoreStep<R> updateFromMoreStep = null;
+        for (Field field : table.fields()) {
+            if (!PK_NAME.equals(field.getName())) {
+                if (null == updateFromMoreStep) {
+                    updateFromMoreStep = dsl.update(table).set(field, record.getValue(field));
+                }
+                updateFromMoreStep.set(field, record.getValue(field));
+            }
+        }
+        return updateFromMoreStep;
     }
 }
 

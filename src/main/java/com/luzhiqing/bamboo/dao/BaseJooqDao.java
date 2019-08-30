@@ -2,6 +2,11 @@ package com.luzhiqing.bamboo.dao;
 
 import java.util.List;
 
+/**
+ * 数据库单表操作基础接口
+ *
+ * @param <P>
+ */
 public interface BaseJooqDao<P> {
     /**
      * 向数据库插入一条记录
@@ -20,12 +25,35 @@ public interface BaseJooqDao<P> {
     long delete(P pojo);
 
     /**
+     * @param pojo
+     * @param callback
+     * @return
+     */
+    long delete(P pojo, Callback callback);
+
+    /**
      * 根据主键修改记录
      *
      * @param pojo
      * @return
      */
-    P update(P pojo);
+    int update(P pojo);
+
+    /**
+     * 同步批量更新
+     *
+     * @param pojos
+     * @return
+     */
+    int batchUpdate(List<P> pojos);
+
+    /**
+     * 异步批量更新
+     *
+     * @param pojos
+     * @return
+     */
+    void batchUpdateSync(List<P> pojos);
 
     /**
      * 查询满足条件的记录
@@ -50,4 +78,12 @@ public interface BaseJooqDao<P> {
      * @return
      */
     int bachInsert(List<P> pojos);
+
+    /**
+     * 异步批量插入
+     *
+     * @param pojos
+     * @return
+     */
+    void bachInsertSync(List<P> pojos);
 }

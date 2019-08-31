@@ -1,8 +1,8 @@
 package com.luzhiqing.bamboo.controller.request;
 
 
-import com.luzhiqing.bamboo.constants.ExpressCompayType;
-import com.luzhiqing.bamboo.constants.OrderType;
+import com.luzhiqing.bamboo.constants.enums.ExpressCompanyType;
+import com.luzhiqing.bamboo.constants.enums.OrderType;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.Date;
 public class ExpressOrderDTO {
 
     private String expressNumber;
-    private ExpressCompayType expressCompany;
+    private ExpressCompanyType expressCompany;
     private Date accessDay;
     private String accessNumber;
     private String phone;

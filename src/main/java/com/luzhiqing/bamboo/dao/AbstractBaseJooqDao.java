@@ -52,7 +52,7 @@ public abstract class AbstractBaseJooqDao<R extends TableRecord<R>, T extends Ta
      */
     protected abstract Class<P> getClazz();
 
-    private AbstractBaseJooqDao() {
+    public AbstractBaseJooqDao() {
         this.table = getTable();
         this.clazz = getClazz();
         table.fields();

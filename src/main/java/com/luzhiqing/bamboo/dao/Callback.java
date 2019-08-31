@@ -8,5 +8,5 @@ package com.luzhiqing.bamboo.dao;
  */
 public interface Callback<T> {
 
-    <T> T ececute();
+    T ececute();
 }

@@ -1,6 +1,8 @@
 package com.luzhiqing.bamboo.cache;
 
 
+import com.luzhiqing.bamboo.dao.Callback;
+
 import java.util.List;
 
 /**
@@ -15,7 +17,7 @@ public interface Cache {
      *
      * @return
      */
-    <T> T execute(CacheCallback<T> callback);
+    <T> T getCache(Callback<T> callback);
 
     /**
      * 丢弃数据
@@ -42,5 +44,14 @@ public interface Cache {
      * @return
      */
     boolean abandon(String nameSpace);
+
+
+    Long getExpireTime();
+
+    String getCacheKey();
+
+    void setCacheKey(String cacheKey);
+
+    void setExpireTime(Long expireTime);
 
 }

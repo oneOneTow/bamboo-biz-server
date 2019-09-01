@@ -24,12 +24,6 @@ public interface BaseJooqDao<P> {
      */
     long delete(P pojo);
 
-    /**
-     * @param pojo
-     * @param callback
-     * @return
-     */
-    long delete(P pojo, Callback callback);
 
     /**
      * 根据主键修改记录

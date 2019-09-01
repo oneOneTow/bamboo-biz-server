@@ -80,14 +80,6 @@ public abstract class AbstractBaseJooqDao<R extends TableRecord<R>, T extends Ta
         return dsl.delete(table).where(conditions).execute();
     }
 
-    @Override
-    public long delete(P pojo, Callback callback) {
-        callback.ececute();
-        R record = table.newRecord();
-        record.from(pojo);
-        List<Condition> conditions = createConditions(record);
-        return dsl.delete(table).where(conditions).execute();
-    }
 
     @Override
     public int update(P pojo) {

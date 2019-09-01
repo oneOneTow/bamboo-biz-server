@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://39.107.239.107:8761/eureka/
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: bamboo-biz-server
+  datasource:
+    url: jdbc:mysql://39.107.239.107:3306/dev
+    username: root
+    password: 7416kobe!
+    driver-class-name: com.mysql.jdbc.Driver
+  jooq:
+    sql-dialect: mysql
+  session:
+    store-type: none
+
+logging:
+  config: classpath:log4j2.xml
+flyway:
+  baseline-on-migrate: true

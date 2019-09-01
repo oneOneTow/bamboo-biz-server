@@ -23,7 +23,6 @@ import java.lang.annotation.*;
 @EnableTransactionManagement
 @EnableFeignClients(basePackages = {"com.luzhiqing.bamboo.remote","com.codingapi.tx.netty.service"}) //FeignClient的根目录要单独扫描
 @SpringBootApplication(scanBasePackages = "com.luzhiqing.bamboo")
-@EnableSpringHttpSession
 @EnableApolloConfig
 public @interface BambooAplication {
 }

@@ -1,13 +1,14 @@
 package com.luzhiqing.bamboo.service;
 
-import com.luzhiqing.bamboo.controller.request.ExpressOrderDTO;
+
+import com.luzhiqing.bamboo.remote.dto.ExpressOrderDTO;
 
 public interface ExpressOrderService {
     /**
-     * 创建一个当你订单
+     * 下单
      *
      * @param orderDTO
      * @return
      */
-    long placeOrder(ExpressOrderDTO orderDTO);
+    ExpressOrderDTO placeOrder(ExpressOrderDTO orderDTO);
 }

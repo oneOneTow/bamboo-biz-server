@@ -1,4 +1,8 @@
 package com.luzhiqing.bamboo.dao;
 
-public interface ExpressOrderDao {
+import com.luzhiqing.bamboo.entity.tables.pojos.TExpressOrder;
+import com.luzhiqing.common.jooq.BaseJooqDao;
+
+public interface ExpressOrderDao extends BaseJooqDao<TExpressOrder> {
+
 }

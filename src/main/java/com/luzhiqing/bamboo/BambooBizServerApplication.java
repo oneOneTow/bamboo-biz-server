@@ -1,6 +1,6 @@
 package com.luzhiqing.bamboo;
 
-import com.luzhiqing.bamboo.annotion.BambooAplication;
+import com.luzhiqing.common.annotion.BambooAplication;
 import org.springframework.boot.SpringApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 

@@ -19,8 +19,8 @@ spring:
     sql-dialect: mysql
   session:
     store-type: none
+  flyway:
+    baseline-on-migrate: true
 
 logging:
   config: classpath:log4j2.xml
-flyway:
-  baseline-on-migrate: true

@@ -8,8 +8,10 @@ import com.luzhiqing.bamboo.service.ExpressOrderService;
 
 import com.luzhiqing.common.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
+@Service
 public class ExpressOrderServiceImpl implements ExpressOrderService {
 
     @Autowired

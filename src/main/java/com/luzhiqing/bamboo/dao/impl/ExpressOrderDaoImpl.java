@@ -10,7 +10,9 @@ import com.luzhiqing.common.cache.Cache;
 import com.luzhiqing.common.jooq.AbstractBaseJooqDao;
 import com.luzhiqing.common.jooq.BaseJooqDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ExpressOrderDaoImpl extends AbstractBaseJooqDao<TExpressOrderRecord, com.luzhiqing.bamboo.entity.tables.TExpressOrder,
         TExpressOrder> implements ExpressOrderDao {
 

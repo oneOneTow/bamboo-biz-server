@@ -6,8 +6,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @BambooApplication
 @EnableSwagger2
-public class BambooBizServerApplication {
+public class BizServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BambooBizServerApplication.class,args);
+        SpringApplication.run(BizServerApplication.class,args);
     }
 }

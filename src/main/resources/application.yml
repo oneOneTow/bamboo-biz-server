@@ -11,7 +11,7 @@ spring:
   application:
     name: bamboo-biz-server
   datasource:
-    url: jdbc:mysql://39.107.239.107:3306/dev
+    url: jdbc:mysql://39.107.239.107:3306/bamboo_biz
     username: root
     password: 7416kobe!
     driver-class-name: com.mysql.jdbc.Driver

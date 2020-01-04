@@ -21,6 +21,8 @@ spring:
     store-type: none
   flyway:
     baseline-on-migrate: true
-
+  data:
+    mongodb:
+      uri: mongodb://39.107.239.107:10011/test
 logging:
   config: classpath:log4j2.xml
